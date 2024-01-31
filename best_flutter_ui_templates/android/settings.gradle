@@ -13,3 +13,10 @@ plugins.each { name, path ->
     include ":$name"
     project(":$name").projectDir = pluginDirectory
 }
+
+// fixme
+includeBuild('C:/dev/sentry-replay-labs/android/screenshot-replay') {
+    dependencySubstitution {
+        substitute module('io.sentry:sentry-replay') using project(':lib')
+    }
+}

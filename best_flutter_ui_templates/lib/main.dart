@@ -4,13 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'navigation_home_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:recorder/recorder.dart';
+import 'package:recorder/sentry_screenshot_widget.dart';
+
+final _recorderPlugin = Recorder();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  _recorderPlugin.start();
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
-  ]).then((_) => runApp(MyApp()));
+  ]).then((_) => runApp(SentryScreenshotWidget(
+        child: MyApp(),
+      )));
 }
 
 class MyApp extends StatelessWidget {
